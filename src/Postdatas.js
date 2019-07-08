@@ -1,27 +1,13 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import PostData from './data/data.json';
-import modal from 'react-responsive-modal';
-import a from './a'; import b from './b';
-import c from './c'; import d from './d';
-import e from './e'; import f from './f';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import g from './g';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import fetchdata from './fetchdata';
-
-import { browserHistory } from 'history';
-import fetch from 'isomorphic-fetch';
-
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 export default class Postdatas extends React.Component {
   taskTypes = [];
   addData = PostData;
-
   constructor(props) {
-
     super(props);
-
     this.state = {
       value: '', taskTypes: PostData, modal: false,
       act: 0,
@@ -39,11 +25,8 @@ export default class Postdatas extends React.Component {
       modal: !this.state.modal
     });
   }
-
-
   handleChange(event) {
     this.setState({ value: event.target.value });
-
     this.taskTypes = PostData.map(function (a) { return a });
     let suggestions = this.taskTypes.filter(function (tname) {
       return tname.title.toLowerCase().includes(event.target.value.toLowerCase());
@@ -78,21 +61,16 @@ export default class Postdatas extends React.Component {
       addData: addData,
       taskTypes: this.addData, modal: !this.state.modal
     });
-
-
   }
-
   adddata(postdetails) {
     console.log(postdetails);
     this.setState({
       showComponent: true,
       passPostDetail: postdetails
     });
-
   }
   fRemove = (i) => {
     let addData = this.state.addData;
-
     addData.splice(i, 1);
     console.log(this.addData);
     this.refs.myform.reset();
@@ -100,8 +78,6 @@ export default class Postdatas extends React.Component {
       addData: addData,
       taskTypes: this.addData
     });
-
-
   }
   remove(postdetails) {
     console.log(postdetails);
@@ -112,67 +88,8 @@ export default class Postdatas extends React.Component {
 
   }
 
-
-
-
-
-  //   showData(){
-  //     return(
-  // <div>
-  // {this.state.showComponent ?
-  //   <div class="container">
-
-  //   <div class="row"> 
-  //   <div class="col-sm-3 mr-5 mt-5 ml-5">
-
-  //       <img src={this.state.passPostDetail.img}  width="300" height="300" /> 
-  //       </div>
-  //       <div class="col   ml-5"> 
-  //       <div class="row-sm-3 offset-sm-3 ml-5 mt-5">  
-  //     <div class="text-center"> <h3>{this.state.passPostDetail.title}</h3></div>
-  //      </div>
-  // <div class="row mt-5">
-  // <div class="col-sm-4">
-  // <div>
-  // <i class="fa fa-star fa-2x">{this.state.passPostDetail.rating}</i>  
-  // </div>
-
-  // </div>
-  // <div class="col-sm-4">
-  // <div>
-  // <i class="fa fa-heart fa-2x">{this.state.passPostDetail.likes}</i>  
-  // </div>
-  // </div>
-  // <div class="col-sm-4">
-  // <div>
-  // <h3>{this.state.passPostDetail.year} </h3> 
-  // </div>
-  // </div>
-  // </div>
-  // <div class="row mt-3">
-  // <div class="col-sm">
-  // <h6>{this.state.passPostDetail.content}</h6>
-
-  // </div>
-  // </div>
-
-  //       </div>
-
-  // </div>
-
-  // </div>    
-  // :
-  //  null
-  // }
-  // </div>
-  //     )
-  //   }
-
-
   render() {
-
     return (
-
       [<div>
         <div className="row">
           <div className="col-sm-2"></div>
@@ -221,7 +138,6 @@ export default class Postdatas extends React.Component {
                       <label>Movie Content:*</label>
                       <textarea type="text" id="price" rows="3" cols="3" placeholder="Enter Movie content..." ref="content" className="form-control"></textarea>
                     </div>
-
                   </ModalBody>
                   <ModalFooter>
                     <Button color="success" onClick={(e) => this.fSubmit(e)}>Add Detailes</Button>{' '}
@@ -230,42 +146,22 @@ export default class Postdatas extends React.Component {
                 </Modal>
               </form>
             </div>
-
-
-
           </div>
         </div>
         <div className="col-sm-2"></div>
       </div>,
-
-
-
-
-
-
-
-
-
       this.state.taskTypes.map((postdetails, index) => {
-
         return (
           <div className="row">
             <div className="col-sm-10 offset-sm-1 mt-5">
-
               <div className="card-deck">
-
                 <div className="col-sm-4 offset-sm-4">
                   <img src={postdetails.img} width="300" className="ml-5 " onClick={() => this.adddata(postdetails)} />
                 </div>
-
-
                 <div>
-
-
                   {
                     this.state.showComponent && this.state.passPostDetail.id === postdetails.id ?
                       <div className="container">
-
                         <div className="row">
                           <div className="col-sm-3 mr-5 mt-5 ml-5">
 
@@ -296,49 +192,26 @@ export default class Postdatas extends React.Component {
                             <div className="row mt-3">
                               <div className="col-sm">
                                 <h6>{this.state.passPostDetail.content}</h6>
-
                               </div>
-
                             </div>
                             <div className="row mt-3">
                               <div className="col-sm-2 offset-sm-4">
                                 <button className="btn btn-primary myButton mb-3" onClick={() => this.remove(index)}  >Delete</button>
                               </div>
                             </div>
-
                           </div>
-
                         </div>
-
-
                       </div>
-
-
                       :
                       null
                   }
                 </div>
-
-
               </div></div>
           </div>
-
-
-
-
-
         )
       }
-
-
-
-
       )
-
-
       ]
-
     )
-
   }
 }
